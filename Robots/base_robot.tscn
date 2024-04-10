@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://b77xdwat8xs16"]
+
+[ext_resource type="Script" path="res://Robots/base_robot.gd" id="1_iffsq"]
+[ext_resource type="Shader" path="res://Shaders/ColorSwap.gdshader" id="2_3rtyv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ut0yb"]
+shader = ExtResource("2_3rtyv")
+shader_parameter/replaceColor = Color(0.996078, 0.682353, 0.203922, 1)
+shader_parameter/replacedColor = null
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kldy0"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[node name="BaseRobot" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_iffsq")
+
+[node name="MoveTimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="WanderTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_ut0yb")
+sprite_frames = SubResource("SpriteFrames_kldy0")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[connection signal="timeout" from="WanderTimer" to="." method="_on_wander_timer_timeout"]

@@ -1,0 +1,114 @@
+[gd_scene load_steps=17 format=3 uid="uid://bo7fkos57lur6"]
+
+[ext_resource type="PackedScene" uid="uid://b77xdwat8xs16" path="res://Robots/base_robot.tscn" id="1_jtspb"]
+[ext_resource type="Script" path="res://Robots/MiningBot/mining_bot.gd" id="2_a4cfx"]
+[ext_resource type="Texture2D" uid="uid://bs0yk4v4sd56y" path="res://Robots/SpriteSheet.png" id="2_puogv"]
+[ext_resource type="Shader" path="res://Shaders/ColorSwap.gdshader" id="2_wdhvn"]
+[ext_resource type="PackedScene" uid="uid://cw2roeqtbq5ev" path="res://Components/EnergyBars/medium_energy_bar.tscn" id="4_4laoh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pvf4t"]
+shader = ExtResource("2_wdhvn")
+shader_parameter/replaceColor = Color(0.996078, 0.682353, 0.203922, 1)
+shader_parameter/replacedColor = Color(0.709804, 0.709804, 0.709804, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7x431"]
+atlas = ExtResource("2_puogv")
+region = Rect2(0, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dc0jj"]
+atlas = ExtResource("2_puogv")
+region = Rect2(24, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6kmyx"]
+atlas = ExtResource("2_puogv")
+region = Rect2(48, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8v5qo"]
+atlas = ExtResource("2_puogv")
+region = Rect2(72, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwkei"]
+atlas = ExtResource("2_puogv")
+region = Rect2(96, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wlfpl"]
+atlas = ExtResource("2_puogv")
+region = Rect2(120, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8716"]
+atlas = ExtResource("2_puogv")
+region = Rect2(144, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w43j8"]
+atlas = ExtResource("2_puogv")
+region = Rect2(168, 0, 24, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w3t0n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7x431")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dc0jj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6kmyx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8v5qo")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwkei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wlfpl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8716")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w43j8")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rulpc"]
+radius = 4.0
+height = 12.0
+
+[node name="MiningBot" node_paths=PackedStringArray("energyBar") instance=ExtResource("1_jtspb")]
+script = ExtResource("2_a4cfx")
+carryCapacity = 2
+energyBar = NodePath("MediumEnergyBar")
+
+[node name="MoveTimer" parent="." index="0"]
+wait_time = 3.0
+one_shot = true
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+material = SubResource("ShaderMaterial_pvf4t")
+position = Vector2(0, -2)
+sprite_frames = SubResource("SpriteFrames_w3t0n")
+frame_progress = 0.691726
+offset = Vector2(0, -14)
+
+[node name="MediumEnergyBar" parent="." index="3" instance=ExtResource("4_4laoh")]
+offset_left = -12.0
+offset_top = -29.0
+offset_right = 12.0
+offset_bottom = -23.0
+
+[node name="CollisionShape2D" parent="." index="4"]
+position = Vector2(0, -4)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_rulpc")
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]

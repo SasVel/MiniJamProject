@@ -1,0 +1,97 @@
+[gd_scene load_steps=14 format=3 uid="uid://561wce68lun6"]
+
+[ext_resource type="PackedScene" uid="uid://b77xdwat8xs16" path="res://Robots/base_robot.tscn" id="1_bpdvl"]
+[ext_resource type="Texture2D" uid="uid://bs0yk4v4sd56y" path="res://Robots/SpriteSheet.png" id="2_jf745"]
+[ext_resource type="PackedScene" uid="uid://cw2roeqtbq5ev" path="res://Components/EnergyBars/medium_energy_bar.tscn" id="3_luhx3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3sty3"]
+atlas = ExtResource("2_jf745")
+region = Rect2(0, 256, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w671y"]
+atlas = ExtResource("2_jf745")
+region = Rect2(24, 256, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6pghl"]
+atlas = ExtResource("2_jf745")
+region = Rect2(48, 256, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whmn4"]
+atlas = ExtResource("2_jf745")
+region = Rect2(72, 256, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ceveb"]
+atlas = ExtResource("2_jf745")
+region = Rect2(96, 256, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shd3k"]
+atlas = ExtResource("2_jf745")
+region = Rect2(120, 256, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uiiic"]
+atlas = ExtResource("2_jf745")
+region = Rect2(144, 256, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h30br"]
+atlas = ExtResource("2_jf745")
+region = Rect2(168, 256, 24, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_poiyf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3sty3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w671y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6pghl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whmn4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ceveb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shd3k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uiiic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h30br")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r4ovp"]
+radius = 5.0
+height = 18.0
+
+[node name="FightBot" instance=ExtResource("1_bpdvl")]
+position = Vector2(0, -16)
+SPEED = 15.0
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+position = Vector2(0, 1)
+sprite_frames = SubResource("SpriteFrames_poiyf")
+frame = 3
+frame_progress = 0.0634634
+
+[node name="MediumEnergyBar" parent="." index="3" instance=ExtResource("3_luhx3")]
+offset_top = -16.0
+offset_bottom = -10.0
+
+[node name="CollisionShape2D" parent="." index="4"]
+position = Vector2(0, 12)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_r4ovp")

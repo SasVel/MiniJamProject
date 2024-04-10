@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfkta4x8cpdqq"]
+
+[ext_resource type="PackedScene" uid="uid://cuobw4u21l6qo" path="res://Buildings/Generator/generator.tscn" id="1_8pvqg"]
+[ext_resource type="PackedScene" uid="uid://c1mcty2jkmwvd" path="res://Environment/coal_deposit.tscn" id="2_ndep2"]
+[ext_resource type="PackedScene" uid="uid://bl2sviqmkh4qo" path="res://Buildings/Quarry/quarry.tscn" id="3_icgqq"]
+
+[node name="Main" type="Node2D"]
+y_sort_enabled = true
+
+[node name="BotsFolder" type="Node" parent="."]
+
+[node name="Generator" parent="." instance=ExtResource("1_8pvqg")]
+position = Vector2(188, 79)
+
+[node name="Quarry" parent="." instance=ExtResource("3_icgqq")]
+position = Vector2(74, 145)
+
+[node name="CoalDeposit" parent="." instance=ExtResource("2_ndep2")]
+position = Vector2(139, 94)
+
+[node name="CoalDeposit2" parent="." instance=ExtResource("2_ndep2")]
+position = Vector2(29, 104)

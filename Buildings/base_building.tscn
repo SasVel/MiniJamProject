@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://doeyadtc0n48k"]
+
+[ext_resource type="Script" path="res://Buildings/base_building.gd" id="1_cvk0q"]
+[ext_resource type="Script" path="res://Buildings/InfoLabel.gd" id="2_8v7vq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xxsyu"]
+size = Vector2(170, 90)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8fkw7"]
+font_size = 6
+
+[node name="BaseBuilding" type="StaticBody2D"]
+y_sort_enabled = true
+script = ExtResource("1_cvk0q")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
+[node name="AssignTimer" type="Timer" parent="."]
+process_callback = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="RangeArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea"]
+shape = SubResource("RectangleShape2D_xxsyu")
+
+[node name="InfoLabel" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -41.0
+offset_right = 20.0
+offset_bottom = -25.0
+label_settings = SubResource("LabelSettings_8fkw7")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_8v7vq")
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

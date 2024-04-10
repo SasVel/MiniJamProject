@@ -1,0 +1,88 @@
+[gd_scene load_steps=12 format=3 uid="uid://bl2sviqmkh4qo"]
+
+[ext_resource type="PackedScene" uid="uid://doeyadtc0n48k" path="res://Buildings/base_building.tscn" id="1_3u32e"]
+[ext_resource type="Texture2D" uid="uid://dxbvhx803eduh" path="res://Buildings/BuildingsSpriteSheet.png" id="2_ifgpu"]
+[ext_resource type="Script" path="res://Buildings/Quarry/quarry.gd" id="2_wxr4j"]
+[ext_resource type="PackedScene" uid="uid://bo7fkos57lur6" path="res://Robots/MiningBot/mining_bot.tscn" id="3_oqgth"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3jx2"]
+atlas = ExtResource("2_ifgpu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfbkh"]
+atlas = ExtResource("2_ifgpu")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybfg4"]
+atlas = ExtResource("2_ifgpu")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icxmp"]
+atlas = ExtResource("2_ifgpu")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yylll"]
+atlas = ExtResource("2_ifgpu")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d2ma5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3jx2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfbkh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybfg4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_icxmp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yylll")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i8nms"]
+size = Vector2(30, 8)
+
+[node name="Quarry" instance=ExtResource("1_3u32e")]
+script = ExtResource("2_wxr4j")
+coalCapacity = 10
+botToSpawnScn = ExtResource("3_oqgth")
+
+[node name="SpawnTimer" parent="." index="0"]
+wait_time = 5.0
+
+[node name="AssignTimer" parent="." index="1"]
+autostart = true
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+position = Vector2(0, -2)
+sprite_frames = SubResource("SpriteFrames_d2ma5")
+autoplay = "default"
+frame = 3
+frame_progress = 0.0450433
+offset = Vector2(0, -14)
+
+[node name="CollisionShape2D" parent="." index="3"]
+position = Vector2(1, -4)
+shape = SubResource("RectangleShape2D_i8nms")
+
+[node name="RangeArea" parent="." index="4"]
+position = Vector2(0, -16)
+collision_mask = 16
+
+[node name="InfoLabel" parent="." index="5"]
+offset_left = -15.0
+offset_top = -45.0
+offset_right = 15.0
+offset_bottom = -35.0
+text = "0/10"
+
+[connection signal="timeout" from="AssignTimer" to="." method="_on_assign_timer_timeout"]

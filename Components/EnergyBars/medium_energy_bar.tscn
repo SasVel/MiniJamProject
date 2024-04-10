@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cw2roeqtbq5ev"]
+
+[ext_resource type="Texture2D" uid="uid://olwe0mt1hu20" path="res://Robots/EnergyProgBarMediumUnder.png" id="1_a3ntb"]
+[ext_resource type="Texture2D" uid="uid://c0rxwxj071cb1" path="res://Robots/EnergyProgBarMediumOver.png" id="2_5iono"]
+[ext_resource type="Script" path="res://Components/EnergyBars/energy_bar.gd" id="3_r2vs5"]
+
+[node name="MediumEnergyBar" type="TextureProgressBar"]
+z_index = 1
+offset_right = 24.0
+offset_bottom = 6.0
+pivot_offset = Vector2(12, 3)
+max_value = 22.0
+value = 22.0
+texture_under = ExtResource("1_a3ntb")
+texture_progress = ExtResource("2_5iono")
+texture_progress_offset = Vector2(1, 1)
+script = ExtResource("3_r2vs5")
+maxEnergy = 22
+
+[node name="EnergyTimer" type="Timer" parent="."]
+process_callback = 0
+autostart = true
+
+[connection signal="timeout" from="EnergyTimer" to="." method="_on_energy_timer_timeout"]

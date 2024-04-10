@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuobw4u21l6qo"]
+
+[ext_resource type="Script" path="res://Buildings/Generator/generator.gd" id="1_vwth6"]
+[ext_resource type="Script" path="res://Buildings/Generator/ChargeArea.gd" id="2_e71tf"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_4u7lv"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dy1a2"]
+radius = 7.0
+height = 22.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8sra6"]
+radius = 26.0
+height = 78.0
+
+[node name="Generator" type="StaticBody2D"]
+script = ExtResource("1_vwth6")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color(0.811765, 0.764706, 0, 1)
+scale = Vector2(16, 38)
+mesh = SubResource("QuadMesh_4u7lv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 15)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_dy1a2")
+
+[node name="ChargeArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("2_e71tf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChargeArea"]
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_8sra6")
+
+[node name="ChargeTimer" type="Timer" parent="ChargeArea"]
+process_callback = 0
+
+[connection signal="timeout" from="ChargeArea/ChargeTimer" to="ChargeArea" method="_on_charge_timer_timeout"]

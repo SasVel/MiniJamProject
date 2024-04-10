@@ -1,0 +1,105 @@
+[gd_scene load_steps=16 format=3 uid="uid://b40m7rkqohiev"]
+
+[ext_resource type="PackedScene" uid="uid://b77xdwat8xs16" path="res://Robots/base_robot.tscn" id="1_f4qjv"]
+[ext_resource type="Texture2D" uid="uid://bs0yk4v4sd56y" path="res://Robots/SpriteSheet.png" id="2_25tvi"]
+[ext_resource type="Shader" path="res://Shaders/ColorSwap.gdshader" id="2_dbqsk"]
+[ext_resource type="PackedScene" uid="uid://bsla3yabcs0gb" path="res://Components/EnergyBars/small_energy_bar.tscn" id="4_k0iwo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vfs6v"]
+shader = ExtResource("2_dbqsk")
+shader_parameter/replaceColor = Color(0.996078, 0.682353, 0.203922, 1)
+shader_parameter/replacedColor = Color(0.0470588, 0.580392, 0.780392, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxrdd"]
+atlas = ExtResource("2_25tvi")
+region = Rect2(0, 448, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxsdh"]
+atlas = ExtResource("2_25tvi")
+region = Rect2(24, 448, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2e2n"]
+atlas = ExtResource("2_25tvi")
+region = Rect2(48, 448, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gk2ye"]
+atlas = ExtResource("2_25tvi")
+region = Rect2(72, 448, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eg406"]
+atlas = ExtResource("2_25tvi")
+region = Rect2(96, 448, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8cie"]
+atlas = ExtResource("2_25tvi")
+region = Rect2(120, 448, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnmuq"]
+atlas = ExtResource("2_25tvi")
+region = Rect2(144, 448, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12txf"]
+atlas = ExtResource("2_25tvi")
+region = Rect2(168, 448, 24, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rqvjc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nxrdd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxsdh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2e2n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gk2ye")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eg406")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b8cie")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bnmuq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_12txf")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yt151"]
+radius = 4.0
+height = 14.0
+
+[node name="CarryBot" node_paths=PackedStringArray("energyBar") instance=ExtResource("1_f4qjv")]
+position = Vector2(0, -15)
+energyBar = NodePath("SmallEnergyBar")
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+material = SubResource("ShaderMaterial_vfs6v")
+sprite_frames = SubResource("SpriteFrames_rqvjc")
+frame = 1
+frame_progress = 0.712903
+
+[node name="SmallEnergyBar" parent="." index="3" instance=ExtResource("4_k0iwo")]
+offset_left = -6.0
+offset_top = -17.0
+offset_right = 6.0
+offset_bottom = -11.0
+
+[node name="CollisionShape2D" parent="." index="4"]
+position = Vector2(0, 14)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_yt151")
