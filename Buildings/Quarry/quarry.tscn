@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bl2sviqmkh4qo"]
+[gd_scene load_steps=19 format=3 uid="uid://bl2sviqmkh4qo"]
 
 [ext_resource type="PackedScene" uid="uid://doeyadtc0n48k" path="res://Buildings/base_building.tscn" id="1_3u32e"]
 [ext_resource type="Texture2D" uid="uid://dxbvhx803eduh" path="res://Buildings/BuildingsSpriteSheet.png" id="2_ifgpu"]
@@ -51,6 +51,44 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i8nms"]
 size = Vector2(30, 8)
 
+[sub_resource type="Curve" id="Curve_uyffq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.818182, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_32a8b"]
+curve = SubResource("Curve_uyffq")
+
+[sub_resource type="Gradient" id="Gradient_xko8v"]
+offsets = PackedFloat32Array(0.696262, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.481789, 0.481789, 0.481789, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ovwtp"]
+gradient = SubResource("Gradient_xko8v")
+
+[sub_resource type="Curve" id="Curve_ffkx1"]
+_data = [Vector2(0, 0.516483), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ndakf"]
+curve = SubResource("Curve_ffkx1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n2yru"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(2, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -186.5
+angle_max = 217.6
+direction = Vector3(0, -1, 0)
+initial_velocity_max = 10.0
+angular_velocity_min = -160.58
+angular_velocity_max = 150.21
+scale_max = 7.0
+scale_curve = SubResource("CurveTexture_ndakf")
+color_ramp = SubResource("GradientTexture1D_ovwtp")
+alpha_curve = SubResource("CurveTexture_32a8b")
+turbulence_noise_strength = 0.2
+
 [node name="Quarry" instance=ExtResource("1_3u32e")]
 script = ExtResource("2_wxr4j")
 coalCapacity = 10
@@ -79,10 +117,20 @@ position = Vector2(0, -16)
 collision_mask = 16
 
 [node name="InfoLabel" parent="." index="5"]
+z_index = 1
 offset_left = -15.0
 offset_top = -45.0
 offset_right = 15.0
 offset_bottom = -35.0
 text = "0/10"
+
+[node name="SmokeParticles" type="GPUParticles2D" parent="." index="6"]
+position = Vector2(-5, -31)
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_n2yru")
+lifetime = 3.0
+speed_scale = 0.8
+explosiveness = 0.13
+randomness = 0.41
 
 [connection signal="timeout" from="AssignTimer" to="." method="_on_assign_timer_timeout"]

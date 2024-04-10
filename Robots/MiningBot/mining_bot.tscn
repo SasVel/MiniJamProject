@@ -91,7 +91,6 @@ energyBar = NodePath("MediumEnergyBar")
 
 [node name="MoveTimer" parent="." index="0"]
 wait_time = 3.0
-one_shot = true
 
 [node name="AnimatedSprite2D" parent="." index="2"]
 material = SubResource("ShaderMaterial_pvf4t")
