@@ -1,0 +1,120 @@
+[gd_scene load_steps=18 format=3 uid="uid://t3fkn2my8gwo"]
+
+[ext_resource type="PackedScene" uid="uid://doeyadtc0n48k" path="res://Buildings/base_building.tscn" id="1_jdnrb"]
+[ext_resource type="Script" path="res://Buildings/CourierStation/courier_station.gd" id="2_lnfcw"]
+[ext_resource type="PackedScene" uid="uid://b40m7rkqohiev" path="res://Robots/CarryBot/carry_bot.tscn" id="2_vaydo"]
+[ext_resource type="Texture2D" uid="uid://dxbvhx803eduh" path="res://Buildings/BuildingsSpriteSheet.png" id="3_rksws"]
+[ext_resource type="Texture2D" uid="uid://d1gajbfqe2ukv" path="res://Buildings/CourierStation/SignalSprite.png" id="5_r6iyi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_80ocw"]
+atlas = ExtResource("3_rksws")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gcqa"]
+atlas = ExtResource("3_rksws")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7hri"]
+atlas = ExtResource("3_rksws")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwt7l"]
+atlas = ExtResource("3_rksws")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dl72f"]
+atlas = ExtResource("3_rksws")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e0q7e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_80ocw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3gcqa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7hri")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwt7l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dl72f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rv486"]
+size = Vector2(24, 5)
+
+[sub_resource type="Curve" id="Curve_plo3n"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.171642, 1), 0.0, 0.0, 0, 0, Vector2(0.828358, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_e0pra"]
+curve = SubResource("Curve_plo3n")
+
+[sub_resource type="Curve" id="Curve_n5ij4"]
+_data = [Vector2(0, 0.549451), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lwgr6"]
+curve = SubResource("Curve_n5ij4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sl4wi"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(2, 2, 1)
+direction = Vector3(0, -1, 0)
+spread = 79.699
+orbit_velocity_min = -0.2
+orbit_velocity_max = 0.2
+gravity = Vector3(0, -5, 0)
+scale_curve = SubResource("CurveTexture_lwgr6")
+alpha_curve = SubResource("CurveTexture_e0pra")
+
+[node name="CourierStation" instance=ExtResource("1_jdnrb")]
+script = ExtResource("2_lnfcw")
+buildingName = "Courier Station"
+botColor = Color(0.996078, 0.682353, 0.203922, 1)
+botToSpawnScn = ExtResource("2_vaydo")
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+position = Vector2(0, -3)
+sprite_frames = SubResource("SpriteFrames_e0q7e")
+autoplay = "default"
+frame_progress = 0.638241
+offset = Vector2(0, -13)
+
+[node name="CollisionShape2D" parent="." index="3"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_rv486")
+
+[node name="RangeArea" parent="." index="4"]
+position = Vector2(0, -16)
+
+[node name="InfoLabel" parent="." index="5"]
+offset_top = -57.0
+offset_bottom = -41.0
+
+[node name="BuildingInfoBox" parent="." index="6" node_paths=PackedStringArray("interactHandler")]
+visible = false
+offset_left = -47.0
+offset_top = -104.0
+offset_right = 48.0
+offset_bottom = -40.0
+mouse_filter = 2
+interactHandler = NodePath("../InteractHandler")
+
+[node name="SignalParticles" type="GPUParticles2D" parent="." index="8"]
+z_index = 1
+position = Vector2(0, -35)
+amount = 3
+process_material = SubResource("ParticleProcessMaterial_sl4wi")
+texture = ExtResource("5_r6iyi")
+lifetime = 3.0

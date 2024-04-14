@@ -92,10 +92,9 @@ turbulence_noise_strength = 0.2
 [node name="Quarry" instance=ExtResource("1_3u32e")]
 script = ExtResource("2_wxr4j")
 coalCapacity = 10
+buildingName = "Quarry"
+botColor = Color(0, 0.6, 0.858824, 1)
 botToSpawnScn = ExtResource("3_oqgth")
-
-[node name="SpawnTimer" parent="." index="0"]
-wait_time = 5.0
 
 [node name="AssignTimer" parent="." index="1"]
 autostart = true
@@ -116,15 +115,7 @@ shape = SubResource("RectangleShape2D_i8nms")
 position = Vector2(0, -16)
 collision_mask = 16
 
-[node name="InfoLabel" parent="." index="5"]
-z_index = 1
-offset_left = -15.0
-offset_top = -45.0
-offset_right = 15.0
-offset_bottom = -35.0
-text = "0/10"
-
-[node name="SmokeParticles" type="GPUParticles2D" parent="." index="6"]
+[node name="SmokeParticles" type="GPUParticles2D" parent="." index="5"]
 position = Vector2(-5, -31)
 amount = 25
 process_material = SubResource("ParticleProcessMaterial_n2yru")
@@ -132,5 +123,23 @@ lifetime = 3.0
 speed_scale = 0.8
 explosiveness = 0.13
 randomness = 0.41
+
+[node name="InfoLabel" parent="." index="6"]
+z_index = 1
+offset_left = -15.0
+offset_top = -45.0
+offset_right = 15.0
+offset_bottom = -35.0
+text = "0/10"
+
+[node name="BuildingInfoBox" parent="." index="7"]
+offset_left = -42.0
+offset_top = -112.0
+offset_right = 43.0
+offset_bottom = -48.0
+mouse_filter = 2
+
+[node name="InteractHandler" parent="." index="8"]
+offset_left = -14.0
 
 [connection signal="timeout" from="AssignTimer" to="." method="_on_assign_timer_timeout"]

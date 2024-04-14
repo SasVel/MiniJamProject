@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvse7jnxfhuik"]
+
+[ext_resource type="PackedScene" uid="uid://d0r6xntfjfxb6" path="res://UI/info_rect.tscn" id="1_nyl8o"]
+[ext_resource type="Script" path="res://UI/BuildingInfoBox/building_info_box.gd" id="2_706d4"]
+[ext_resource type="LabelSettings" uid="uid://l8v8ktq51ak6" path="res://UI/in_game_ui_info_settings.tres" id="3_pi0kw"]
+
+[node name="BuildingInfoBox" instance=ExtResource("1_nyl8o")]
+offset_right = 85.0
+script = ExtResource("2_706d4")
+
+[node name="MarginContainer" type="MarginContainer" parent="." index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" index="0"]
+layout_mode = 2
+
+[node name="LabelBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" index="0"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/LabelBox" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/LabelBox" index="1"]
+layout_mode = 2
+label_settings = ExtResource("3_pi0kw")
+
+[node name="ColorBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer" index="1"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ColorBox" index="0"]
+layout_mode = 2
+text = "bot color"
+label_settings = ExtResource("3_pi0kw")
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="MarginContainer/VBoxContainer/ColorBox" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="color_changed" from="MarginContainer/VBoxContainer/ColorBox/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]

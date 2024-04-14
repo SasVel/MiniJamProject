@@ -1,9 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://b40m7rkqohiev"]
+[gd_scene load_steps=23 format=3 uid="uid://b40m7rkqohiev"]
 
 [ext_resource type="PackedScene" uid="uid://b77xdwat8xs16" path="res://Robots/base_robot.tscn" id="1_f4qjv"]
+[ext_resource type="Script" path="res://Robots/CarryBot/carry_bot.gd" id="2_2dn5x"]
 [ext_resource type="Texture2D" uid="uid://bs0yk4v4sd56y" path="res://Robots/SpriteSheet.png" id="2_25tvi"]
 [ext_resource type="Shader" path="res://Shaders/ColorSwap.gdshader" id="2_dbqsk"]
 [ext_resource type="PackedScene" uid="uid://bsla3yabcs0gb" path="res://Components/EnergyBars/small_energy_bar.tscn" id="4_k0iwo"]
+[ext_resource type="PackedScene" uid="uid://d0r6xntfjfxb6" path="res://UI/info_rect.tscn" id="5_4kllq"]
+[ext_resource type="Script" path="res://UI/BotInfoBoxes/carry_bot_info_box.gd" id="7_3d8d3"]
+[ext_resource type="PackedScene" uid="uid://com3q7pjcx5db" path="res://Components/UI/interact_handler.tscn" id="7_fvhlr"]
+[ext_resource type="LabelSettings" uid="uid://l8v8ktq51ak6" path="res://UI/in_game_ui_info_settings.tres" id="7_npklk"]
+[ext_resource type="Script" path="res://Robots/CarryBot/control.gd" id="9_fejxc"]
+[ext_resource type="Script" path="res://Robots/CarryBot/drag_line.gd" id="10_ecic2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vfs6v"]
 shader = ExtResource("2_dbqsk")
@@ -85,6 +92,7 @@ height = 14.0
 
 [node name="CarryBot" node_paths=PackedStringArray("energyBar") instance=ExtResource("1_f4qjv")]
 position = Vector2(0, -15)
+script = ExtResource("2_2dn5x")
 energyBar = NodePath("SmallEnergyBar")
 
 [node name="AnimatedSprite2D" parent="." index="2"]
@@ -103,3 +111,65 @@ offset_bottom = -11.0
 position = Vector2(0, 14)
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_yt151")
+
+[node name="InfoRect" parent="." index="5" node_paths=PackedStringArray("interactHandler") instance=ExtResource("5_4kllq")]
+offset_left = -37.0
+offset_top = -89.0
+offset_right = 44.0
+offset_bottom = -25.0
+script = ExtResource("7_3d8d3")
+interactHandler = NodePath("../InteractHandler")
+
+[node name="MarginContainer" type="MarginContainer" parent="InfoRect" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InfoRect/MarginContainer" index="0"]
+layout_mode = 2
+
+[node name="LabelBox" type="VBoxContainer" parent="InfoRect/MarginContainer/VBoxContainer" index="0"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="InfoRect/MarginContainer/VBoxContainer/LabelBox" index="0"]
+layout_mode = 2
+text = "Carry bot"
+label_settings = ExtResource("7_npklk")
+horizontal_alignment = 1
+
+[node name="PosBox" type="HBoxContainer" parent="InfoRect/MarginContainer/VBoxContainer" index="1"]
+layout_mode = 2
+
+[node name="AssignLabel" type="Label" parent="InfoRect/MarginContainer/VBoxContainer/PosBox" index="0"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "assign"
+label_settings = ExtResource("7_npklk")
+horizontal_alignment = 1
+
+[node name="Control" type="TextureRect" parent="InfoRect/MarginContainer/VBoxContainer/PosBox" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("9_fejxc")
+
+[node name="DragLine" type="Line2D" parent="InfoRect/MarginContainer/VBoxContainer/PosBox" index="2"]
+position = Vector2(32, 75)
+points = PackedVector2Array(0, 0, -85, -9)
+width = 2.0
+script = ExtResource("10_ecic2")
+
+[node name="InteractHandler" parent="." index="6" instance=ExtResource("7_fvhlr")]
+offset_left = -9.0
+offset_top = -19.0
+offset_right = 9.0
+offset_bottom = 17.0
+pivot_offset = Vector2(0, 0)
+
+[connection signal="dragging" from="InfoRect/MarginContainer/VBoxContainer/PosBox/Control" to="InfoRect/MarginContainer/VBoxContainer/PosBox/DragLine" method="_on_control_dragging"]

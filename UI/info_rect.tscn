@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0r6xntfjfxb6"]
+
+[ext_resource type="Texture2D" uid="uid://giwamjepa4xn" path="res://UI/InfoRectSprite.png" id="1_c7huw"]
+
+[node name="InfoRect" type="NinePatchRect"]
+z_index = 2
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 0
+texture = ExtResource("1_c7huw")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32

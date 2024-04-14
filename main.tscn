@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cuobw4u21l6qo" path="res://Buildings/Generator/generator.tscn" id="1_8pvqg"]
 [ext_resource type="PackedScene" uid="uid://c1mcty2jkmwvd" path="res://Environment/coal_deposit.tscn" id="2_ndep2"]
-[ext_resource type="PackedScene" uid="uid://bl2sviqmkh4qo" path="res://Buildings/Quarry/quarry.tscn" id="3_icgqq"]
+[ext_resource type="PackedScene" uid="uid://t3fkn2my8gwo" path="res://Buildings/CourierStation/courier_station.tscn" id="4_737rc"]
 
 [sub_resource type="Environment" id="Environment_p3rv8"]
 background_mode = 3
@@ -20,13 +20,13 @@ environment = SubResource("Environment_p3rv8")
 [node name="BotsFolder" type="Node" parent="."]
 
 [node name="Generator" parent="." instance=ExtResource("1_8pvqg")]
-position = Vector2(188, 79)
-
-[node name="Quarry" parent="." instance=ExtResource("3_icgqq")]
-position = Vector2(74, 145)
+position = Vector2(320, 178)
 
 [node name="CoalDeposit" parent="." instance=ExtResource("2_ndep2")]
 position = Vector2(139, 94)
 
 [node name="CoalDeposit2" parent="." instance=ExtResource("2_ndep2")]
 position = Vector2(29, 104)
+
+[node name="CourierStation" parent="." instance=ExtResource("4_737rc")]
+position = Vector2(506, 255)

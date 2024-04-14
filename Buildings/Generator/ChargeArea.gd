@@ -4,7 +4,7 @@ extends Area2D
 @onready var floatingParticles = $FloatingParticles
 @onready var lineParticles = $LineParticles
 
-func _input(event):
+func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		self.global_position = get_global_mouse_position()
 	

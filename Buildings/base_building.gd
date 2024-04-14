@@ -1,8 +1,10 @@
 extends StaticBody2D
 class_name BaseBuilding
 
+@export var buildingName : String
 @export var maxBots : int = 5
 var currBots : Array[BaseBot]
+@export var botColor : Color
 @export var botToSpawnScn : PackedScene
 @onready var spawnTimer = $SpawnTimer
 @onready var rangeArea = $RangeArea
@@ -18,6 +20,7 @@ func _on_spawn_timer_timeout():
 	botInst.global_position = self.global_position
 	Ref.botsFolder.add_child(botInst)
 	currBots.push_back(botInst)
+	botInst.set_color(botColor)
 	if maxBots == currBots.size():
 		spawnTimer.stop()
 

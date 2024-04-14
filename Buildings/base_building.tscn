@@ -1,20 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://doeyadtc0n48k"]
+[gd_scene load_steps=7 format=3 uid="uid://doeyadtc0n48k"]
 
 [ext_resource type="Script" path="res://Buildings/base_building.gd" id="1_cvk0q"]
 [ext_resource type="Script" path="res://Buildings/InfoLabel.gd" id="2_8v7vq"]
+[ext_resource type="LabelSettings" uid="uid://djbd0bw3uwlmr" path="res://UI/in_game_ui_settings.tres" id="2_kcede"]
+[ext_resource type="PackedScene" uid="uid://com3q7pjcx5db" path="res://Components/UI/interact_handler.tscn" id="3_hjehq"]
+[ext_resource type="PackedScene" uid="uid://dvse7jnxfhuik" path="res://UI/BuildingInfoBox/building_info_box.tscn" id="4_qftpe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xxsyu"]
-size = Vector2(170, 90)
-
-[sub_resource type="LabelSettings" id="LabelSettings_8fkw7"]
-font_size = 6
+size = Vector2(96, 86)
 
 [node name="BaseBuilding" type="StaticBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_cvk0q")
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 15.0
+wait_time = 5.0
 autostart = true
 
 [node name="AssignTimer" type="Timer" parent="."]
@@ -35,9 +35,20 @@ offset_left = -20.0
 offset_top = -41.0
 offset_right = 20.0
 offset_bottom = -25.0
-label_settings = SubResource("LabelSettings_8fkw7")
+label_settings = ExtResource("2_kcede")
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_8v7vq")
 
+[node name="BuildingInfoBox" parent="." node_paths=PackedStringArray("interactHandler") instance=ExtResource("4_qftpe")]
+offset_left = -43.0
+offset_top = -106.0
+offset_right = 42.0
+offset_bottom = -42.0
+mouse_filter = 2
+interactHandler = NodePath("../InteractHandler")
+
+[node name="InteractHandler" parent="." instance=ExtResource("3_hjehq")]
+
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="toggled" from="InteractHandler" to="BuildingInfoBox" method="_on_interact_handler_toggled"]

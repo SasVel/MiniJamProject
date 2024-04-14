@@ -1,4 +1,4 @@
 extends Label
 
-func update(str : String):
-	self.text = str
+func update(str_ : String):
+	self.text = str_

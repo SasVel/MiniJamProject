@@ -112,3 +112,6 @@ func stop():
 	wanderTimer.stop()
 	moveTimer.stop()
 	if moveTween != null: moveTween.kill()
+
+func set_color(color : Color):
+	sprites.material.set_shader_parameter("replacedColor", color)

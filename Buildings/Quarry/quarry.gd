@@ -21,7 +21,6 @@ func _on_assign_timer_timeout():
 			if bots.size() != 0:
 				deposit.assignedBots += 1
 				bots[0].start_work(deposit)
-				
 
 func bot_interact(val):
 	coalInStorage += val
