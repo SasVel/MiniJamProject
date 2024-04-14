@@ -77,21 +77,24 @@ animations = [{
 radius = 5.0
 height = 18.0
 
-[node name="FightBot" instance=ExtResource("1_bpdvl")]
+[node name="FightBot" node_paths=PackedStringArray("energyBar") instance=ExtResource("1_bpdvl")]
 position = Vector2(0, -16)
 SPEED = 15.0
+energyBar = NodePath("MediumEnergyBar")
 
-[node name="AnimatedSprite2D" parent="." index="2"]
+[node name="MediumEnergyBar" parent="." index="3" instance=ExtResource("3_luhx3")]
+offset_left = -12.0
+offset_top = -16.0
+offset_right = 12.0
+offset_bottom = -10.0
+
+[node name="AnimatedSprite2D" parent="." index="4"]
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_poiyf")
 frame = 3
 frame_progress = 0.0634634
 
-[node name="MediumEnergyBar" parent="." index="3" instance=ExtResource("3_luhx3")]
-offset_top = -16.0
-offset_bottom = -10.0
-
-[node name="CollisionShape2D" parent="." index="4"]
+[node name="CollisionShape2D" parent="." index="5"]
 position = Vector2(0, 12)
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_r4ovp")

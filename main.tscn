@@ -1,9 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfkta4x8cpdqq"]
+[gd_scene load_steps=16 format=3 uid="uid://cfkta4x8cpdqq"]
 
+[ext_resource type="Script" path="res://UI/main_container.gd" id="1_6hs1o"]
 [ext_resource type="PackedScene" uid="uid://cuobw4u21l6qo" path="res://Buildings/Generator/generator.tscn" id="1_8pvqg"]
+[ext_resource type="PackedScene" uid="uid://d0r6xntfjfxb6" path="res://UI/info_rect.tscn" id="1_pvq1m"]
 [ext_resource type="PackedScene" uid="uid://c1mcty2jkmwvd" path="res://Environment/coal_deposit.tscn" id="2_ndep2"]
+[ext_resource type="LabelSettings" uid="uid://l8v8ktq51ak6" path="res://UI/in_game_ui_info_settings.tres" id="2_pdneg"]
+[ext_resource type="Texture2D" uid="uid://dxbvhx803eduh" path="res://Buildings/BuildingsSpriteSheet.png" id="3_2r0eo"]
+[ext_resource type="Script" path="res://UI/buildings_btn.gd" id="4_0i016"]
 [ext_resource type="PackedScene" uid="uid://t3fkn2my8gwo" path="res://Buildings/CourierStation/courier_station.tscn" id="4_737rc"]
 [ext_resource type="PackedScene" uid="uid://bl2sviqmkh4qo" path="res://Buildings/Quarry/quarry.tscn" id="4_pe8mf"]
+[ext_resource type="PackedScene" uid="uid://byu1v7j4jy6d4" path="res://Buildings/Barracks/barracks.tscn" id="7_mpbpb"]
+[ext_resource type="Script" path="res://UI/build_range.gd" id="9_36ely"]
 
 [sub_resource type="Environment" id="Environment_p3rv8"]
 background_mode = 3
@@ -12,6 +19,18 @@ glow_intensity = 1.1
 glow_bloom = 0.2
 glow_hdr_threshold = 1.2
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_mt2q5"]
+atlas = ExtResource("3_2r0eo")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rr1o"]
+atlas = ExtResource("3_2r0eo")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wjig"]
+atlas = ExtResource("3_2r0eo")
+region = Rect2(0, 64, 32, 32)
+
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
 
@@ -19,6 +38,125 @@ y_sort_enabled = true
 environment = SubResource("Environment_p3rv8")
 
 [node name="BotsFolder" type="Node" parent="."]
+
+[node name="BuildingsFolder" type="Node" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="MainContainer" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_6hs1o")
+
+[node name="InfoRect" parent="UI/MainContainer" instance=ExtResource("1_pvq1m")]
+layout_mode = 2
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 92.0
+offset_bottom = 171.0
+size_flags_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/MainContainer/InfoRect"]
+layout_mode = 0
+offset_right = 81.0
+offset_bottom = 154.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainContainer/InfoRect/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/MainContainer/InfoRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Buildings"
+label_settings = ExtResource("2_pdneg")
+horizontal_alignment = 1
+
+[node name="Control2" type="Control" parent="UI/MainContainer/InfoRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="QuarryBox" type="VBoxContainer" parent="UI/MainContainer/InfoRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UI/MainContainer/InfoRect/MarginContainer/VBoxContainer/QuarryBox"]
+layout_mode = 2
+text = "Quarry"
+label_settings = ExtResource("2_pdneg")
+horizontal_alignment = 1
+
+[node name="QuarryBtn" type="TextureButton" parent="UI/MainContainer/InfoRect/MarginContainer/VBoxContainer/QuarryBox"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_mt2q5")
+stretch_mode = 3
+script = ExtResource("4_0i016")
+buildingScn = ExtResource("4_pe8mf")
+
+[node name="CourierStationBox" type="VBoxContainer" parent="UI/MainContainer/InfoRect/MarginContainer/VBoxContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UI/MainContainer/InfoRect/MarginContainer/VBoxContainer/CourierStationBox"]
+auto_translate_mode = 1
+layout_mode = 2
+text = "Courier Station"
+label_settings = ExtResource("2_pdneg")
+
+[node name="CourierStationBtn" type="TextureButton" parent="UI/MainContainer/InfoRect/MarginContainer/VBoxContainer/CourierStationBox"]
+auto_translate_mode = 1
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_4rr1o")
+stretch_mode = 3
+script = ExtResource("4_0i016")
+buildingScn = ExtResource("4_737rc")
+
+[node name="Barracks" type="VBoxContainer" parent="UI/MainContainer/InfoRect/MarginContainer/VBoxContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UI/MainContainer/InfoRect/MarginContainer/VBoxContainer/Barracks"]
+auto_translate_mode = 1
+layout_mode = 2
+text = "Barracks"
+label_settings = ExtResource("2_pdneg")
+horizontal_alignment = 1
+
+[node name="BarracksButton" type="TextureButton" parent="UI/MainContainer/InfoRect/MarginContainer/VBoxContainer/Barracks"]
+auto_translate_mode = 1
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_2wjig")
+stretch_mode = 3
+script = ExtResource("4_0i016")
+buildingScn = ExtResource("7_mpbpb")
+
+[node name="BuildRange" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -264.0
+offset_top = -147.0
+offset_right = 264.0
+offset_bottom = 147.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("9_36ely")
 
 [node name="Generator" parent="." instance=ExtResource("1_8pvqg")]
 position = Vector2(320, 178)
