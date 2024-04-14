@@ -87,6 +87,7 @@ height = 12.0
 [node name="MiningBot" node_paths=PackedStringArray("energyBar") instance=ExtResource("1_jtspb")]
 script = ExtResource("2_a4cfx")
 carryCapacity = 2
+SPEED = 13.0
 energyBar = NodePath("MediumEnergyBar")
 
 [node name="MoveTimer" parent="." index="0"]

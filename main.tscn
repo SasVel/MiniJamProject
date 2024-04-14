@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfkta4x8cpdqq"]
+[gd_scene load_steps=6 format=3 uid="uid://cfkta4x8cpdqq"]
 
 [ext_resource type="PackedScene" uid="uid://cuobw4u21l6qo" path="res://Buildings/Generator/generator.tscn" id="1_8pvqg"]
 [ext_resource type="PackedScene" uid="uid://c1mcty2jkmwvd" path="res://Environment/coal_deposit.tscn" id="2_ndep2"]
 [ext_resource type="PackedScene" uid="uid://t3fkn2my8gwo" path="res://Buildings/CourierStation/courier_station.tscn" id="4_737rc"]
+[ext_resource type="PackedScene" uid="uid://bl2sviqmkh4qo" path="res://Buildings/Quarry/quarry.tscn" id="4_pe8mf"]
 
 [sub_resource type="Environment" id="Environment_p3rv8"]
 background_mode = 3
@@ -30,3 +31,6 @@ position = Vector2(29, 104)
 
 [node name="CourierStation" parent="." instance=ExtResource("4_737rc")]
 position = Vector2(506, 255)
+
+[node name="Quarry" parent="." instance=ExtResource("4_pe8mf")]
+position = Vector2(147, 184)

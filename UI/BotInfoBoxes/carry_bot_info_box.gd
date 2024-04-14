@@ -1,3 +1,0 @@
-extends InfoBox
-
-

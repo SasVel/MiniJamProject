@@ -6,8 +6,8 @@
 [ext_resource type="Shader" path="res://Shaders/ColorSwap.gdshader" id="2_dbqsk"]
 [ext_resource type="PackedScene" uid="uid://bsla3yabcs0gb" path="res://Components/EnergyBars/small_energy_bar.tscn" id="4_k0iwo"]
 [ext_resource type="PackedScene" uid="uid://d0r6xntfjfxb6" path="res://UI/info_rect.tscn" id="5_4kllq"]
-[ext_resource type="Script" path="res://UI/BotInfoBoxes/carry_bot_info_box.gd" id="7_3d8d3"]
 [ext_resource type="PackedScene" uid="uid://com3q7pjcx5db" path="res://Components/UI/interact_handler.tscn" id="7_fvhlr"]
+[ext_resource type="Script" path="res://UI/InfoBox/info_box.gd" id="7_itl5e"]
 [ext_resource type="LabelSettings" uid="uid://l8v8ktq51ak6" path="res://UI/in_game_ui_info_settings.tres" id="7_npklk"]
 [ext_resource type="Script" path="res://Robots/CarryBot/control.gd" id="9_fejxc"]
 [ext_resource type="Script" path="res://Robots/CarryBot/drag_line.gd" id="10_ecic2"]
@@ -93,13 +93,11 @@ height = 14.0
 [node name="CarryBot" node_paths=PackedStringArray("energyBar") instance=ExtResource("1_f4qjv")]
 position = Vector2(0, -15)
 script = ExtResource("2_2dn5x")
+SPEED = 15.0
 energyBar = NodePath("SmallEnergyBar")
 
-[node name="AnimatedSprite2D" parent="." index="2"]
-material = SubResource("ShaderMaterial_vfs6v")
-sprite_frames = SubResource("SpriteFrames_rqvjc")
-frame = 1
-frame_progress = 0.712903
+[node name="MoveTimer" parent="." index="0"]
+wait_time = 2.0
 
 [node name="SmallEnergyBar" parent="." index="3" instance=ExtResource("4_k0iwo")]
 offset_left = -6.0
@@ -107,17 +105,18 @@ offset_top = -17.0
 offset_right = 6.0
 offset_bottom = -11.0
 
-[node name="CollisionShape2D" parent="." index="4"]
-position = Vector2(0, 14)
-rotation = -1.57079
-shape = SubResource("CapsuleShape2D_yt151")
+[node name="AnimatedSprite2D" parent="." index="4"]
+material = SubResource("ShaderMaterial_vfs6v")
+sprite_frames = SubResource("SpriteFrames_rqvjc")
+frame = 1
+frame_progress = 0.712903
 
 [node name="InfoRect" parent="." index="5" node_paths=PackedStringArray("interactHandler") instance=ExtResource("5_4kllq")]
 offset_left = -37.0
 offset_top = -89.0
 offset_right = 44.0
 offset_bottom = -25.0
-script = ExtResource("7_3d8d3")
+script = ExtResource("7_itl5e")
 interactHandler = NodePath("../InteractHandler")
 
 [node name="MarginContainer" type="MarginContainer" parent="InfoRect" index="0"]
@@ -160,6 +159,7 @@ size_flags_horizontal = 3
 script = ExtResource("9_fejxc")
 
 [node name="DragLine" type="Line2D" parent="InfoRect/MarginContainer/VBoxContainer/PosBox" index="2"]
+visible = false
 position = Vector2(32, 75)
 points = PackedVector2Array(0, 0, -85, -9)
 width = 2.0
@@ -172,4 +172,14 @@ offset_right = 9.0
 offset_bottom = 17.0
 pivot_offset = Vector2(0, 0)
 
+[node name="CollisionShape2D" parent="." index="7"]
+position = Vector2(0, 14)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_yt151")
+
+[node name="WarningMark" parent="." index="8"]
+offset_top = -38.0
+offset_bottom = -23.0
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
 [connection signal="dragging" from="InfoRect/MarginContainer/VBoxContainer/PosBox/Control" to="InfoRect/MarginContainer/VBoxContainer/PosBox/DragLine" method="_on_control_dragging"]

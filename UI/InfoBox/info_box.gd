@@ -5,6 +5,7 @@ class_name InfoBox
 
 func _ready():
 	interactHandler.toggled.connect(_on_interact_handler_toggled)
+	self.visible = false
 
 func _on_interact_handler_toggled(isOn):
 	if isOn:

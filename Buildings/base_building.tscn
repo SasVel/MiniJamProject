@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dvse7jnxfhuik" path="res://UI/BuildingInfoBox/building_info_box.tscn" id="4_qftpe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xxsyu"]
-size = Vector2(96, 86)
+size = Vector2(244, 170)
 
 [node name="BaseBuilding" type="StaticBody2D"]
 y_sort_enabled = true

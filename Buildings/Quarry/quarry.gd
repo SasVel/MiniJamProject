@@ -1,4 +1,5 @@
 extends BaseBuilding
+class_name Quarry
 
 @export var coalCapacity = 10
 @onready var coalInStorage = 0 :

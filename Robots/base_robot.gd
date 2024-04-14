@@ -7,6 +7,7 @@ class_name BaseBot
 @onready var wanderTimer = $WanderTimer
 @onready var moveTimer = $MoveTimer
 @onready var sprites = $AnimatedSprite2D
+@onready var warningMark = $WarningMark
 var boundingRect : Rect2
 var buildingOwner : StaticBody2D
 
@@ -97,7 +98,7 @@ func move(target_pos : Vector2):
 	sprites.play("walk")
 	
 	moveTween = create_tween()
-	moveTween.tween_property(self, "position", target_pos, SPEED / 10)
+	moveTween.tween_property(self, "position", target_pos, 25 / SPEED)
 	
 	#Sprite filp
 	if position.x > target_pos.x:
@@ -115,3 +116,6 @@ func stop():
 
 func set_color(color : Color):
 	sprites.material.set_shader_parameter("replacedColor", color)
+
+func _on_problem_check_timer_timeout():
+	pass # Replace with function body.
