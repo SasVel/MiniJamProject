@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bsla3yabcs0gb"]
 
-[ext_resource type="Texture2D" uid="uid://drdpnkxkhnd8m" path="res://Robots/EnergyProgBarSmallUnder.png" id="1_tor7d"]
-[ext_resource type="Texture2D" uid="uid://cbyvce6qnknp1" path="res://Robots/EnergyProgBarSmallOver.png" id="2_y3u6p"]
+[ext_resource type="Texture2D" uid="uid://drdpnkxkhnd8m" path="res://Components/EnergyBars/EnergyProgBarSmallUnder.png" id="1_tor7d"]
+[ext_resource type="Texture2D" uid="uid://cbyvce6qnknp1" path="res://Components/EnergyBars/EnergyProgBarSmallOver.png" id="2_y3u6p"]
 [ext_resource type="Script" path="res://Components/EnergyBars/energy_bar.gd" id="3_lqhre"]
 
 [node name="SmallEnergyBar" type="TextureProgressBar"]

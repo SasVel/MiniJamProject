@@ -25,7 +25,6 @@ animations = [{
 [node name="BaseRobot" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 8
-collision_mask = 0
 script = ExtResource("1_iffsq")
 
 [node name="MoveTimer" type="Timer" parent="."]

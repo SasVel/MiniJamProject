@@ -1,7 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://t3fkn2my8gwo"]
+[gd_scene load_steps=19 format=3 uid="uid://t3fkn2my8gwo"]
 
 [ext_resource type="PackedScene" uid="uid://doeyadtc0n48k" path="res://Buildings/base_building.tscn" id="1_jdnrb"]
-[ext_resource type="Script" path="res://Buildings/CourierStation/courier_station.gd" id="2_lnfcw"]
 [ext_resource type="PackedScene" uid="uid://b40m7rkqohiev" path="res://Robots/CarryBot/carry_bot.tscn" id="2_vaydo"]
 [ext_resource type="Texture2D" uid="uid://dxbvhx803eduh" path="res://Buildings/BuildingsSpriteSheet.png" id="3_rksws"]
 [ext_resource type="Shader" path="res://Shaders/GlowShader.gdshader" id="4_wahvi"]
@@ -85,11 +84,10 @@ gravity = Vector3(0, -5, 0)
 scale_curve = SubResource("CurveTexture_lwgr6")
 alpha_curve = SubResource("CurveTexture_e0pra")
 
-[node name="CourierStation" instance=ExtResource("1_jdnrb")]
-script = ExtResource("2_lnfcw")
-buildingName = "Courier Station"
-botColor = Color(0.996078, 0.682353, 0.203922, 1)
+[node name="CourierStation" node_paths=PackedStringArray("energyBar") instance=ExtResource("1_jdnrb")]
+botColor = Color(0.907557, 0.645721, 0, 1)
 botToSpawnScn = ExtResource("2_vaydo")
+energyBar = NodePath("LargeEnergyBar")
 
 [node name="AnimatedSprite2D" parent="." index="2"]
 self_modulate = Color(1.5, 1.5, 1.5, 1)
@@ -97,7 +95,7 @@ material = SubResource("ShaderMaterial_ldl0d")
 position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_e0q7e")
 autoplay = "default"
-frame_progress = 0.638241
+frame_progress = 0.171468
 offset = Vector2(0, -13)
 
 [node name="CollisionShape2D" parent="." index="3"]
@@ -105,7 +103,6 @@ position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_rv486")
 
 [node name="RangeArea" parent="." index="4"]
-visible = false
 position = Vector2(0, -16)
 
 [node name="InfoLabel" parent="." index="5"]
@@ -127,3 +124,8 @@ amount = 3
 process_material = SubResource("ParticleProcessMaterial_sl4wi")
 texture = ExtResource("5_r6iyi")
 lifetime = 3.0
+
+[node name="LargeEnergyBar" parent="." index="9"]
+z_index = 2
+offset_top = -52.0
+offset_bottom = -45.0

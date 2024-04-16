@@ -13,7 +13,6 @@ size = Vector2(244, 170)
 [node name="BaseBuilding" type="CharacterBody2D" node_paths=PackedStringArray("energyBar")]
 y_sort_enabled = true
 collision_layer = 32
-collision_mask = 0
 script = ExtResource("1_cvk0q")
 energyBar = NodePath("LargeEnergyBar")
 
@@ -55,6 +54,6 @@ interactHandler = NodePath("../InteractHandler")
 [node name="InteractHandler" parent="." instance=ExtResource("3_hjehq")]
 
 [node name="LargeEnergyBar" parent="." instance=ExtResource("6_w0nf7")]
+z_index = 1
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
-[connection signal="toggled" from="InteractHandler" to="BuildingInfoBox" method="_on_interact_handler_toggled"]

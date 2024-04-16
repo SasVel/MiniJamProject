@@ -10,8 +10,8 @@
 [ext_resource type="Script" path="res://UI/InfoBox/info_box.gd" id="7_itl5e"]
 [ext_resource type="LabelSettings" uid="uid://l8v8ktq51ak6" path="res://UI/in_game_ui_info_settings.tres" id="7_npklk"]
 [ext_resource type="Script" path="res://Robots/CarryBot/control.gd" id="9_fejxc"]
+[ext_resource type="Shader" path="res://Shaders/GlowShader.gdshader" id="10_3kfdn"]
 [ext_resource type="Script" path="res://Robots/CarryBot/drag_line.gd" id="10_ecic2"]
-[ext_resource type="Shader" path="res://Shaders/SawtoothShader.gdshader" id="10_eihyl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vfs6v"]
 shader = ExtResource("2_dbqsk")
@@ -87,9 +87,11 @@ animations = [{
 "speed": 6.0
 }]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ry8j6"]
-shader = ExtResource("10_eihyl")
-shader_parameter/saw_period = 0.3
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0w48m"]
+shader = ExtResource("10_3kfdn")
+shader_parameter/bloomRadius = 5.0
+shader_parameter/bloomThreshold = 0.8
+shader_parameter/bloomIntensity = 5.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yt151"]
 radius = 4.0
@@ -164,10 +166,12 @@ size_flags_horizontal = 3
 script = ExtResource("9_fejxc")
 
 [node name="DragLine" type="Line2D" parent="InfoRect/MarginContainer/VBoxContainer/PosBox" index="2"]
-material = SubResource("ShaderMaterial_ry8j6")
+material = SubResource("ShaderMaterial_0w48m")
 position = Vector2(32, 75)
-points = PackedVector2Array(0, 0, -64, -8, -112, -7)
+points = PackedVector2Array(0, 0, -64, -8)
 width = 2.0
+begin_cap_mode = 2
+end_cap_mode = 2
 script = ExtResource("10_ecic2")
 
 [node name="InteractHandler" parent="." index="6" instance=ExtResource("7_fvhlr")]

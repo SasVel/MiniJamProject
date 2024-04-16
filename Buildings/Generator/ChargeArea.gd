@@ -17,6 +17,7 @@ func _unhandled_input(event):
 
 func _on_charge_timer_timeout():
 	var entities = self.get_overlapping_bodies()
+	print(entities)
 	for entity in entities:
 		if entity is BaseBot:
 			entity.energyBar.charge(5)

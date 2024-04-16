@@ -14,7 +14,6 @@ func _get_drag_data(at_position):
 	preview.add_child(dragTexture)
 	dragTexture.position = -0.5 * dragTexture.size
 	
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	set_drag_preview(preview)
 	
 	return buildingScn

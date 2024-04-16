@@ -40,6 +40,22 @@ environment = SubResource("Environment_p3rv8")
 
 [node name="BuildingsFolder" type="Node" parent="."]
 
+[node name="BuildRange" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 56.0
+offset_top = 33.0
+offset_right = 584.0
+offset_bottom = 327.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("9_36ely")
+
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 5
 
@@ -142,35 +158,24 @@ stretch_mode = 3
 script = ExtResource("4_0i016")
 buildingScn = ExtResource("7_mpbpb")
 
-[node name="BuildRange" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -264.0
-offset_top = -147.0
-offset_right = 264.0
-offset_bottom = 147.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-script = ExtResource("9_36ely")
-
-[node name="Generator" parent="." instance=ExtResource("1_8pvqg")]
-position = Vector2(320, 178)
-
 [node name="CoalDeposit" parent="." instance=ExtResource("2_ndep2")]
 position = Vector2(139, 94)
 
 [node name="CoalDeposit2" parent="." instance=ExtResource("2_ndep2")]
 position = Vector2(29, 104)
 
-[node name="CourierStation" parent="." instance=ExtResource("4_737rc")]
+[node name="CourierStation" parent="." node_paths=PackedStringArray("energyBar") instance=ExtResource("4_737rc")]
 position = Vector2(506, 255)
 collision_layer = 1
+collision_mask = 0
+energyBar = NodePath("LargeEnergyBar")
 
-[node name="Quarry" parent="." instance=ExtResource("4_pe8mf")]
+[node name="Quarry" parent="." node_paths=PackedStringArray("energyBar") instance=ExtResource("4_pe8mf")]
 position = Vector2(147, 184)
 collision_layer = 1
+collision_mask = 0
+energyBar = NodePath("LargeEnergyBar")
+
+[node name="Generator" parent="." instance=ExtResource("1_8pvqg")]
+
+[editable path="Generator"]

@@ -93,20 +93,20 @@ energyBar = NodePath("MediumEnergyBar")
 [node name="MoveTimer" parent="." index="0"]
 wait_time = 3.0
 
-[node name="AnimatedSprite2D" parent="." index="2"]
-material = SubResource("ShaderMaterial_pvf4t")
-position = Vector2(0, -2)
-sprite_frames = SubResource("SpriteFrames_w3t0n")
-frame_progress = 0.691726
-offset = Vector2(0, -14)
-
 [node name="MediumEnergyBar" parent="." index="3" instance=ExtResource("4_4laoh")]
 offset_left = -12.0
 offset_top = -29.0
 offset_right = 12.0
 offset_bottom = -23.0
 
-[node name="CollisionShape2D" parent="." index="4"]
+[node name="AnimatedSprite2D" parent="." index="4"]
+material = SubResource("ShaderMaterial_pvf4t")
+position = Vector2(0, -2)
+sprite_frames = SubResource("SpriteFrames_w3t0n")
+frame_progress = 0.691726
+offset = Vector2(0, -14)
+
+[node name="CollisionShape2D" parent="." index="5"]
 position = Vector2(0, -4)
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_rulpc")

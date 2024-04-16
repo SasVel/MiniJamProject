@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cbyvce6qnknp1"
-path="res://.godot/imported/EnergyProgBarSmallOver.png-adc273e76fca8e7da1b616fefb47b673.ctex"
+path="res://.godot/imported/EnergyProgBarSmallOver.png-8fd25a3339fd6818f827c82df3e2d166.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Robots/EnergyProgBarSmallOver.png"
-dest_files=["res://.godot/imported/EnergyProgBarSmallOver.png-adc273e76fca8e7da1b616fefb47b673.ctex"]
+source_file="res://Components/EnergyBars/EnergyProgBarSmallOver.png"
+dest_files=["res://.godot/imported/EnergyProgBarSmallOver.png-8fd25a3339fd6818f827c82df3e2d166.ctex"]
 
 [params]
 

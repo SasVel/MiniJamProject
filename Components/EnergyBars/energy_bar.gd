@@ -13,6 +13,7 @@ extends TextureProgressBar
 		else:
 			no_energy.emit()
 			energyTimer.stop()
+@export var energyLostPerTick : int = 1
 
 @onready var defaultPosition : Vector2 = self.position
 @onready var energyTimer = $EnergyTimer
@@ -31,7 +32,7 @@ func reset_offset():
 	tween.tween_property(self, "position", defaultPosition, 0.2)
 
 func _on_energy_timer_timeout():
-	energyInStorage -= 1
+	energyInStorage -= energyLostPerTick
 
 func deplete(energy):
 	energyInStorage -= energy
