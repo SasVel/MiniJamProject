@@ -1,8 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://byu1v7j4jy6d4"]
+[gd_scene load_steps=12 format=3 uid="uid://byu1v7j4jy6d4"]
 
 [ext_resource type="PackedScene" uid="uid://doeyadtc0n48k" path="res://Buildings/base_building.tscn" id="1_0m131"]
 [ext_resource type="Texture2D" uid="uid://dxbvhx803eduh" path="res://Buildings/BuildingsSpriteSheet.png" id="2_0jalt"]
 [ext_resource type="PackedScene" uid="uid://561wce68lun6" path="res://Robots/FightBot/fight_bot.tscn" id="2_ll8gr"]
+[ext_resource type="Shader" path="res://Shaders/GlowShader.gdshader" id="3_r8jqo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rllwg"]
+shader = ExtResource("3_r8jqo")
+shader_parameter/bloomRadius = 2.0
+shader_parameter/bloomThreshold = 0.8
+shader_parameter/bloomIntensity = 5.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_451o2"]
 atlas = ExtResource("2_0jalt")
@@ -53,9 +60,11 @@ botColor = Color(0.243137, 0.537255, 0.282353, 1)
 botToSpawnScn = ExtResource("2_ll8gr")
 
 [node name="AnimatedSprite2D" parent="." index="2"]
+material = SubResource("ShaderMaterial_rllwg")
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_fsf4x")
-frame_progress = 0.668858
+autoplay = "default"
+frame_progress = 0.890095
 offset = Vector2(0, -14)
 
 [node name="CollisionShape2D" parent="." index="3"]

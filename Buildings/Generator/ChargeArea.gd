@@ -16,9 +16,12 @@ func _unhandled_input(event):
 		chargeTimer.stop()
 
 func _on_charge_timer_timeout():
-	var bots = self.get_overlapping_bodies()
-	for bot in bots:
-		bot.energyBar.charge(5)
+	var entities = self.get_overlapping_bodies()
+	for entity in entities:
+		if entity is BaseBot:
+			entity.energyBar.charge(5)
+		elif entity is BaseBuilding:
+			entity.energyBar.charge(10)
 
 func switch_particles(isOn : bool):
 	floatingParticles.emitting = isOn

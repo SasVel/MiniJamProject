@@ -1,17 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://doeyadtc0n48k"]
+[gd_scene load_steps=8 format=3 uid="uid://doeyadtc0n48k"]
 
 [ext_resource type="Script" path="res://Buildings/base_building.gd" id="1_cvk0q"]
 [ext_resource type="Script" path="res://Buildings/InfoLabel.gd" id="2_8v7vq"]
 [ext_resource type="LabelSettings" uid="uid://djbd0bw3uwlmr" path="res://UI/in_game_ui_settings.tres" id="2_kcede"]
 [ext_resource type="PackedScene" uid="uid://com3q7pjcx5db" path="res://Components/UI/interact_handler.tscn" id="3_hjehq"]
 [ext_resource type="PackedScene" uid="uid://dvse7jnxfhuik" path="res://UI/BuildingInfoBox/building_info_box.tscn" id="4_qftpe"]
+[ext_resource type="PackedScene" uid="uid://n7drlb1euhbe" path="res://Components/EnergyBars/large_energy_bar.tscn" id="6_w0nf7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xxsyu"]
 size = Vector2(244, 170)
 
-[node name="BaseBuilding" type="StaticBody2D"]
+[node name="BaseBuilding" type="CharacterBody2D" node_paths=PackedStringArray("energyBar")]
 y_sort_enabled = true
+collision_layer = 32
+collision_mask = 0
 script = ExtResource("1_cvk0q")
+energyBar = NodePath("LargeEnergyBar")
 
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 5.0
@@ -49,6 +53,8 @@ mouse_filter = 2
 interactHandler = NodePath("../InteractHandler")
 
 [node name="InteractHandler" parent="." instance=ExtResource("3_hjehq")]
+
+[node name="LargeEnergyBar" parent="." instance=ExtResource("6_w0nf7")]
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="toggled" from="InteractHandler" to="BuildingInfoBox" method="_on_interact_handler_toggled"]

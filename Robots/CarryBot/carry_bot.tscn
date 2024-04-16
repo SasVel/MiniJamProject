@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b40m7rkqohiev"]
+[gd_scene load_steps=25 format=3 uid="uid://b40m7rkqohiev"]
 
 [ext_resource type="PackedScene" uid="uid://b77xdwat8xs16" path="res://Robots/base_robot.tscn" id="1_f4qjv"]
 [ext_resource type="Script" path="res://Robots/CarryBot/carry_bot.gd" id="2_2dn5x"]
@@ -11,6 +11,7 @@
 [ext_resource type="LabelSettings" uid="uid://l8v8ktq51ak6" path="res://UI/in_game_ui_info_settings.tres" id="7_npklk"]
 [ext_resource type="Script" path="res://Robots/CarryBot/control.gd" id="9_fejxc"]
 [ext_resource type="Script" path="res://Robots/CarryBot/drag_line.gd" id="10_ecic2"]
+[ext_resource type="Shader" path="res://Shaders/SawtoothShader.gdshader" id="10_eihyl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vfs6v"]
 shader = ExtResource("2_dbqsk")
@@ -86,6 +87,10 @@ animations = [{
 "speed": 6.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ry8j6"]
+shader = ExtResource("10_eihyl")
+shader_parameter/saw_period = 0.3
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yt151"]
 radius = 4.0
 height = 14.0
@@ -159,8 +164,9 @@ size_flags_horizontal = 3
 script = ExtResource("9_fejxc")
 
 [node name="DragLine" type="Line2D" parent="InfoRect/MarginContainer/VBoxContainer/PosBox" index="2"]
+material = SubResource("ShaderMaterial_ry8j6")
 position = Vector2(32, 75)
-points = PackedVector2Array(0, 0, -85, -9)
+points = PackedVector2Array(0, 0, -64, -8, -112, -7)
 width = 2.0
 script = ExtResource("10_ecic2")
 

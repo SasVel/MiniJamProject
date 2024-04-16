@@ -1,9 +1,16 @@
-[gd_scene load_steps=19 format=3 uid="uid://bl2sviqmkh4qo"]
+[gd_scene load_steps=21 format=3 uid="uid://bl2sviqmkh4qo"]
 
 [ext_resource type="PackedScene" uid="uid://doeyadtc0n48k" path="res://Buildings/base_building.tscn" id="1_3u32e"]
 [ext_resource type="Texture2D" uid="uid://dxbvhx803eduh" path="res://Buildings/BuildingsSpriteSheet.png" id="2_ifgpu"]
 [ext_resource type="Script" path="res://Buildings/Quarry/quarry.gd" id="2_wxr4j"]
 [ext_resource type="PackedScene" uid="uid://bo7fkos57lur6" path="res://Robots/MiningBot/mining_bot.tscn" id="3_oqgth"]
+[ext_resource type="Shader" path="res://Shaders/GlowShader.gdshader" id="4_hlj70"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ym5s5"]
+shader = ExtResource("4_hlj70")
+shader_parameter/bloomRadius = 2.0
+shader_parameter/bloomThreshold = 0.8
+shader_parameter/bloomIntensity = 5.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h3jx2"]
 atlas = ExtResource("2_ifgpu")
@@ -89,17 +96,19 @@ color_ramp = SubResource("GradientTexture1D_ovwtp")
 alpha_curve = SubResource("CurveTexture_32a8b")
 turbulence_noise_strength = 0.2
 
-[node name="Quarry" instance=ExtResource("1_3u32e")]
+[node name="Quarry" node_paths=PackedStringArray("energyBar") instance=ExtResource("1_3u32e")]
 script = ExtResource("2_wxr4j")
 coalCapacity = 10
 buildingName = "Quarry"
 botColor = Color(0, 0.6, 0.858824, 1)
 botToSpawnScn = ExtResource("3_oqgth")
+energyBar = NodePath("LargeEnergyBar")
 
 [node name="AssignTimer" parent="." index="1"]
 autostart = true
 
 [node name="AnimatedSprite2D" parent="." index="2"]
+material = SubResource("ShaderMaterial_ym5s5")
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_d2ma5")
 autoplay = "default"

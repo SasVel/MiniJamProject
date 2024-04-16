@@ -9,7 +9,7 @@ class_name BaseBot
 @onready var sprites = $AnimatedSprite2D
 @onready var warningMark = $WarningMark
 var boundingRect : Rect2
-var buildingOwner : StaticBody2D
+var buildingOwner : CharacterBody2D
 
 var isAvailable = true
 #Tweens
@@ -33,7 +33,7 @@ var state = IDLE :
 
 var lastState = IDLE
 
-func init(buildingOwner_ : StaticBody2D, boundingRect_ : Rect2):
+func init(buildingOwner_ : CharacterBody2D, boundingRect_ : Rect2):
 	buildingOwner = buildingOwner_
 	boundingRect = boundingRect_
 

@@ -15,9 +15,8 @@
 [sub_resource type="Environment" id="Environment_p3rv8"]
 background_mode = 3
 glow_enabled = true
-glow_intensity = 1.1
-glow_bloom = 0.2
-glow_hdr_threshold = 1.2
+glow_intensity = 0.32
+glow_bloom = 0.27
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mt2q5"]
 atlas = ExtResource("3_2r0eo")
@@ -59,7 +58,7 @@ layout_mode = 2
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 92.0
-offset_bottom = 171.0
+offset_bottom = 183.0
 size_flags_horizontal = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/MainContainer/InfoRect"]
@@ -113,6 +112,7 @@ auto_translate_mode = 1
 layout_mode = 2
 text = "Courier Station"
 label_settings = ExtResource("2_pdneg")
+horizontal_alignment = 1
 
 [node name="CourierStationBtn" type="TextureButton" parent="UI/MainContainer/InfoRect/MarginContainer/VBoxContainer/CourierStationBox"]
 auto_translate_mode = 1
@@ -169,6 +169,8 @@ position = Vector2(29, 104)
 
 [node name="CourierStation" parent="." instance=ExtResource("4_737rc")]
 position = Vector2(506, 255)
+collision_layer = 1
 
 [node name="Quarry" parent="." instance=ExtResource("4_pe8mf")]
 position = Vector2(147, 184)
+collision_layer = 1

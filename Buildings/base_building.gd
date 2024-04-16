@@ -1,15 +1,20 @@
-extends StaticBody2D
+extends CharacterBody2D
 class_name BaseBuilding
 
 @export var buildingName : String
 @export var maxBots : int = 5
 var currBots : Array[BaseBot]
+@export var energyMaxStorage : int
+var energyInStorage : int :
+	set(val):
+		energyInStorage = clamp(val, 0, energyMaxStorage)
 @export var botColor : Color
 @export var botToSpawnScn : PackedScene
 @onready var spawnTimer = $SpawnTimer
 @onready var rangeArea = $RangeArea
 @onready var rangeAreaShape : CollisionShape2D = $RangeArea/CollisionShape2D
 @onready var infoLabel = $InfoLabel
+@export var energyBar : TextureProgressBar
 
 func _on_spawn_timer_timeout():
 	var botInst : BaseBot = botToSpawnScn.instantiate()

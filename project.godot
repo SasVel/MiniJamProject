@@ -58,6 +58,7 @@ close_menu={
 2d_physics/layer_3="BotHitbox"
 2d_physics/layer_4="BotColl"
 2d_physics/layer_5="Coal"
+2d_physics/layer_6="BuildingColl"
 
 [rendering]
 
